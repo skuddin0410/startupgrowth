@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Startup Growth Magazine</title>
+<meta name="description" content="Canada's magazine for founders, startups and scaleups.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF8F5; --paper-2:#F2EEE8; --card:#FFFFFF;
+  --ink:#141414; --ink-2:#3B3B3B; --muted:#6B6762; --rule:#E2DDD5; --rule-strong:#141414;
+  --red:#D9262C; --red-ink:#B71D22; --on-red:#FFFFFF;
+  --dark:#111111; --on-dark:#F5F2ED; --on-dark-muted:#A8A39B;
+  --ph-a:#E9E3DA; --ph-b:#D9D1C5;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --max:1240px; --gutter:24px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121110; --paper-2:#1B1A18; --card:#1A1917;
+    --ink:#F2EEE8; --ink-2:#CFC9C0; --muted:#9A948B; --rule:#2E2C29; --rule-strong:#F2EEE8;
+    --red:#EF4148; --red-ink:#FF6A70; --dark:#0A0A09;
+    --ph-a:#262420; --ph-b:#34312C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121110; --paper-2:#1B1A18; --card:#1A1917;
+  --ink:#F2EEE8; --ink-2:#CFC9C0; --muted:#9A948B; --rule:#2E2C29; --rule-strong:#F2EEE8;
+  --red:#EF4148; --red-ink:#FF6A70; --dark:#0A0A09;
+  --ph-a:#262420; --ph-b:#34312C;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 14px;z-index:99}
+.skip:focus{left:8px}
+
+/* ---------- type primitives ---------- */
+.kicker{font:600 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--red-ink)}
+.meta{font:500 13px/1.4 var(--sans);color:var(--muted)}
+.meta b{color:var(--ink-2);font-weight:600}
+.h{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.15;margin:0;text-wrap:balance}
+.h a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .25s var(--ease)}
+.h a:hover{background-size:100% 1px}
+.dek{font-family:var(--serif);font-size:18px;line-height:1.5;color:var(--ink-2);margin:0}
+
+/* ---------- placeholder media ---------- */
+.media{position:relative;aspect-ratio:3/2;background:
+  radial-gradient(120% 90% at var(--x,30%) var(--y,20%),var(--ph-b) 0,transparent 60%),
+  repeating-linear-gradient(var(--r,135deg),transparent 0 14px,color-mix(in srgb,var(--ph-b) 55%,transparent) 14px 15px),
+  var(--ph-a);overflow:hidden}
+.media::after{content:attr(data-label);position:absolute;left:12px;bottom:10px;font:600 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.media.tall{aspect-ratio:4/5}
+.media.wide{aspect-ratio:16/9}
+.media.sq{aspect-ratio:1}
+a:hover .media, .card:hover .media{filter:brightness(.97)}
+
+/* ---------- top bar ---------- */
+.util{border-bottom:1px solid var(--rule);font:500 12.5px/1 var(--sans);color:var(--muted)}
+.util .wrap{display:flex;align-items:center;justify-content:space-between;height:40px;gap:16px}
+.util .soc{display:flex;gap:4px}
+.icon-btn{display:inline-grid;place-items:center;width:44px;height:40px;border:0;background:none;color:var(--ink-2);border-radius:6px;transition:color .2s,background .2s}
+.icon-btn:hover{color:var(--red-ink);background:var(--paper-2)}
+.icon-btn svg{width:18px;height:18px}
+
+/* ---------- masthead ---------- */
+.mast{padding:28px 0 20px;text-align:center}
+.logo{display:inline-flex;align-items:center;gap:.08em;font:700 clamp(34px,6vw,64px)/1 var(--sans);letter-spacing:-.035em;text-transform:uppercase}
+.logo .o{display:inline-grid;place-items:center;width:.78em;height:.78em;background:var(--red);border-radius:50%;margin:0 .02em;transform:translateY(.02em)}
+.logo .o svg{width:.46em;height:.46em;fill:#fff}
+.tagline{margin:10px 0 0;font:italic 500 17px/1.3 var(--serif);color:var(--muted)}
+
+.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;gap:8px;height:56px}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px;flex:1;justify-content:center}
+.nav li a{display:flex;align-items:center;height:56px;padding:0 13px;font:600 14px/1 var(--sans);color:var(--ink-2);position:relative;transition:color .2s}
+.nav li a::after{content:"";position:absolute;left:13px;right:13px;bottom:-1px;height:2px;background:var(--red);transform:scaleX(0);transition:transform .25s var(--ease)}
+.nav li a:hover,.nav li a[aria-current]{color:var(--ink)}
+.nav li a:hover::after,.nav li a[aria-current]::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid transparent;font:600 14px/1 var(--sans);white-space:nowrap;transition:background .2s,color .2s,border-color .2s,transform .15s}
+.btn:active{transform:translateY(1px)}
+.btn-red{background:var(--red);color:var(--on-red)}
+.btn-red:hover{background:var(--red-ink)}
+.btn-ghost{border-color:var(--rule-strong);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn svg{width:16px;height:16px}
+.menu-btn{display:none}
+.mobile-menu{display:none}
+
+/* ---------- ticker ---------- */
+.ticker{border-bottom:1px solid var(--rule)}
+.ticker .wrap{display:flex;align-items:center;gap:16px;height:46px;overflow:hidden}
+.ticker .tag{flex:none;display:inline-flex;align-items:center;gap:8px;font:700 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--red-ink)}
+.ticker .dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
+.ticker ul{list-style:none;margin:0;padding:0;display:flex;gap:28px;white-space:nowrap;overflow:hidden;mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.ticker li{font:500 14px/1 var(--sans);color:var(--ink-2)}
+.ticker li a:hover{color:var(--red-ink)}
+
+/* ---------- section scaffolding ---------- */
+section{padding:56px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:2px solid var(--rule-strong);padding-top:14px;margin-bottom:28px}
+.sec-head h2{font:700 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin:0}
+.sec-head a{font:600 13.5px/1 var(--sans);color:var(--muted);display:inline-flex;align-items:center;gap:6px;min-height:32px;transition:color .2s}
+.sec-head a:hover{color:var(--red-ink)}
+.sec-head a svg{width:14px;height:14px;transition:transform .2s}
+.sec-head a:hover svg{transform:translateX(3px)}
+
+/* ---------- hero ---------- */
+.hero{padding-top:40px}
+.hero-grid{display:grid;grid-template-columns:1.65fr 1fr 0.9fr;gap:40px}
+.lead .media{margin-bottom:20px}
+.lead .h{font-size:clamp(30px,3.6vw,46px);margin:12px 0 14px;line-height:1.08}
+.lead .dek{margin-bottom:14px;max-width:60ch}
+.stack{display:flex;flex-direction:column;gap:24px}
+.stack article{padding-bottom:24px;border-bottom:1px solid var(--rule)}
+.stack article:last-child{border:0;padding-bottom:0}
+.stack .media{margin-bottom:12px}
+.stack .h{font-size:21px;margin:8px 0 8px}
+.mostread{border-left:1px solid var(--rule);padding-left:28px}
+.mostread h2{font:700 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin:0 0 6px;padding-bottom:14px;border-bottom:2px solid var(--rule-strong)}
+.mostread ol{list-style:none;counter-reset:n;margin:0;padding:0}
+.mostread li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;gap:6px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.mostread li::before{content:counter(n);font:600 30px/1 var(--serif);color:var(--red)}
+.mostread li a{font:600 16.5px/1.3 var(--serif)}
+.mostread li a:hover{color:var(--red-ink)}
+
+/* ---------- awards (dark band) ---------- */
+.awards{background:var(--dark);color:var(--on-dark);padding:80px 0;position:relative;overflow:hidden}
+.awards::before{content:"";position:absolute;right:-180px;top:-180px;width:560px;height:560px;border-radius:50%;border:1px solid rgba(255,255,255,.08);box-shadow:0 0 0 80px rgba(255,255,255,.02),0 0 0 160px rgba(255,255,255,.015)}
+.awards .kicker{color:#FF6A70}
+.aw-top{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:end;margin-bottom:48px;position:relative}
+.awards .h{font-size:clamp(34px,4.4vw,58px);line-height:1.04;margin-top:14px}
+.awards .h em{font-style:italic;color:#FF6A70;font-weight:500}
+.awards p{color:var(--on-dark-muted);font-size:17px;margin:0 0 24px;max-width:52ch}
+.aw-cta{display:flex;gap:12px;flex-wrap:wrap}
+.awards .btn-ghost{border-color:rgba(255,255,255,.35);color:var(--on-dark)}
+.awards .btn-ghost:hover{background:var(--on-dark);color:var(--dark)}
+.aw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);position:relative}
+.aw-card{background:var(--dark);padding:26px 24px 24px;display:flex;flex-direction:column;gap:14px;min-height:170px;transition:background .25s}
+.aw-card:hover{background:#1C1B1A}
+.aw-card .ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);color:#FF6A70}
+.aw-card .ico svg{width:18px;height:18px}
+.aw-card h3{font:600 21px/1.2 var(--serif);margin:0}
+.aw-card .meta{color:var(--on-dark-muted);margin-top:auto;display:flex;justify-content:space-between;align-items:center}
+.aw-card .meta svg{width:16px;height:16px;transition:transform .2s}
+.aw-card:hover .meta svg{transform:translateX(4px)}
+
+/* ---------- grids ---------- */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:32px 28px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 28px}
+.card .media{margin-bottom:14px}
+.card .h{font-size:20px;margin:8px 0 10px}
+.card p.ex{margin:0 0 10px;color:var(--ink-2);font-size:15px;line-height:1.55}
+
+/* ---------- interviews (Q&A) ---------- */
+.qa{background:var(--paper-2)}
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.qa-card{background:var(--card);border:1px solid var(--rule);padding:28px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .25s var(--ease)}
+.qa-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.qa-card .q{font:500 64px/.6 var(--serif);color:var(--red);height:28px}
+.qa-card .h{font-size:22px}
+.qa-card .meta{margin-top:auto;padding-top:14px;border-top:1px solid var(--rule)}
+
+/* ---------- split: capital list + feature ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.list-rows article{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.list-rows article:first-child{padding-top:0}
+.list-rows .media{aspect-ratio:1}
+.list-rows .h{font-size:18.5px;margin:6px 0 6px}
+.feature-big .media{aspect-ratio:4/3;margin-bottom:18px}
+.feature-big .h{font-size:clamp(26px,2.6vw,34px);margin:10px 0 12px}
+
+/* ---------- story CTA ---------- */
+.story-cta{padding:0}
+.story-box{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;background:var(--red);color:#fff;padding:56px;position:relative;overflow:hidden}
+.story-box::after{content:"";position:absolute;right:-60px;bottom:-120px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.08)}
+.story-box .h{font-size:clamp(28px,3.2vw,42px);line-height:1.08}
+.story-box p{margin:14px 0 0;font-size:17px;color:rgba(255,255,255,.88);max-width:52ch}
+.story-box .actions{display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;z-index:1}
+.btn-white{background:#fff;color:#141414}
+.btn-white:hover{background:#141414;color:#fff}
+.story-box .small{font:500 13.5px/1.4 var(--sans);color:rgba(255,255,255,.85)}
+
+/* ---------- latest + newsletter ---------- */
+.latest-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px}
+.news-list article{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.news-list time{font:600 12px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.news-list .h{font-size:19px}
+.news-list .h + p{margin:6px 0 0;color:var(--ink-2);font-size:15px}
+.newsletter{background:var(--card);border:1px solid var(--rule-strong);padding:32px;align-self:start;position:sticky;top:80px}
+.newsletter .h{font-size:28px;margin:10px 0 10px}
+.newsletter p{margin:0 0 20px;color:var(--ink-2)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font:600 13px/1 var(--sans)}
+.field input{height:48px;padding:0 14px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);font:400 16px var(--sans);border-radius:6px;transition:border-color .2s}
+.field input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--red) 25%,transparent)}
+.newsletter .btn{width:100%;border-radius:6px}
+.newsletter .fine{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+.form-msg{font:500 14px/1.4 var(--sans);color:var(--ink);margin-top:10px;min-height:20px}
+
+/* ---------- footer ---------- */
+footer{background:var(--dark);color:var(--on-dark);padding:64px 0 28px;margin-top:24px}
+.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+footer .logo{font-size:30px;color:var(--on-dark)}
+footer p{color:var(--on-dark-muted);font-size:15px;max-width:44ch}
+footer h3{font:700 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted);margin:6px 0 16px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+footer ul a{display:inline-block;padding:6px 0;font-size:15px;color:var(--on-dark);transition:color .2s}
+footer ul a:hover{color:#FF6A70}
+footer .icon-btn{color:var(--on-dark-muted)}
+footer .icon-btn:hover{background:#1f1e1c;color:#fff}
+.f-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);margin-top:48px;padding-top:22px;font-size:13px;color:var(--on-dark-muted)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(12px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .hero-grid{grid-template-columns:1.4fr 1fr}
+  .mostread{grid-column:1/-1;border-left:0;padding-left:0}
+  .mostread ol{display:grid;grid-template-columns:repeat(2,1fr);column-gap:32px}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .nav li a{padding:0 9px;font-size:13.5px}
+  .nav li a::after{left:9px;right:9px}
+}
+@media (max-width:900px){
+  .nav ul,.nav .btn-red{display:none}
+  .menu-btn{display:inline-grid}
+  .nav .wrap{justify-content:space-between}
+  .nav .mini-logo{display:inline-flex}
+  .mobile-menu[data-open="true"]{display:block;border-top:1px solid var(--rule);background:var(--paper)}
+  .mobile-menu ul{list-style:none;margin:0;padding:8px var(--gutter) 20px}
+  .mobile-menu a{display:flex;align-items:center;min-height:48px;font:600 17px/1 var(--sans);border-bottom:1px solid var(--rule)}
+  .mobile-menu .btn{margin-top:16px;width:100%}
+  .aw-top,.split,.latest-grid,.story-box{grid-template-columns:1fr;gap:32px}
+  .aw-grid,.qa-grid,.g3{grid-template-columns:repeat(2,1fr)}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .newsletter{position:static}
+}
+@media (max-width:640px){
+  :root{--gutter:16px}
+  section{padding:40px 0}
+  .util .date{display:none}
+  .mast{padding:20px 0 14px}
+  .tagline{font-size:15px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .stack .media{display:none}
+  .mostread ol{grid-template-columns:1fr}
+  .g4,.g3,.aw-grid,.qa-grid{grid-template-columns:1fr}
+  .g4 .card:not(:first-child){display:grid;grid-template-columns:96px 1fr;gap:14px}
+  .g4 .card:not(:first-child) .media{aspect-ratio:1;margin:0}
+  .g4 .card:not(:first-child) .h{font-size:17px;margin:4px 0 6px}
+  .story-box{padding:36px 22px}
+  .list-rows article{grid-template-columns:84px 1fr;gap:14px}
+  .news-list article{grid-template-columns:1fr;gap:6px}
+  .f-grid{grid-template-columns:1fr}
+  .awards{padding:56px 0}
+}
+.mini-logo{display:none;font:700 18px/1 var(--sans);letter-spacing:-.03em;text-transform:uppercase;align-items:center;gap:2px}
+.mini-logo .o{display:inline-block;width:.7em;height:.7em;border-radius:50%;background:var(--red)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.6h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.76V21h-4v-5.1c0-1.22-.02-2.78-1.8-2.78-1.8 0-2.08 1.33-2.08 2.7V21h-4V9.75Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0 0 14.27 4.3c-2.3 0-3.87 1.4-3.87 3.97v2.23H7.8v3h2.6V21h3.1Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 8 5-3 5 3-1.5-8"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c2 .7 3.2 2.5 3.6 5.2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.3-2 4-2 6 2 0 4.7-.5 6-2"/><path d="M9 15l-3-3c1.8-5 5.6-8.5 13-9-.5 7.4-4 11.2-9 13Z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.5-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.5 12 20 12 20Z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.4l-6.1 3.5 1.5-6.8-5.2-4.6 6.9-.7Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Utility bar -->
+<div class="util">
+  <div class="wrap">
+    <span class="date">Monday, November 9, 2026 &nbsp;·&nbsp; Canada's Startup &amp; Scaleup Magazine</span>
+    <div class="soc">
+      <a class="icon-btn" href="#" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+      <a class="icon-btn" href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+      <a class="icon-btn" href="#" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
+      <button class="icon-btn" id="theme" aria-label="Toggle dark mode"><svg><use href="#i-sun"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<header class="mast">
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Startup Growth home">Startup&nbsp;Gr<span class="o" aria-hidden="true"><svg><use href="#i-star"/></svg></span>wth</a>
+    <p class="tagline">Stories, capital and ideas from Canada's founders</p>
+  </div>
+</header>
+
+<!-- Sticky nav -->
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a href="#" class="mini-logo" aria-label="Startup Growth home">Startup Gr<span class="o"></span>wth</a>
+    <button class="icon-btn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+    <ul>
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#startups">Startups</a></li>
+      <li><a href="#">Scaleups</a></li>
+      <li><a href="#capital">Capital</a></li>
+      <li><a href="#founders">Founders</a></li>
+      <li><a href="#ai">AI &amp; Tech</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#">Podcast</a></li>
+      <li><a href="#latest">News</a></li>
+    </ul>
+    <a href="#newsletter" class="btn btn-red">Subscribe</a>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg><use href="#i-menu"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" data-open="false">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#startups">Startups</a></li>
+      <li><a href="#">Scaleups</a></li>
+      <li><a href="#capital">Capital</a></li>
+      <li><a href="#founders">Founders</a></li>
+      <li><a href="#ai">AI &amp; Tech</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#">Podcast</a></li>
+      <li><a href="#latest">News</a></li>
+      <li><a href="#newsletter" class="btn btn-red">Subscribe — it's free</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Ticker -->
+<div class="ticker" aria-label="Latest headlines">
+  <div class="wrap">
+    <span class="tag"><span class="dot"></span>Latest</span>
+    <ul>
+      <li><a href="#">Why Startups Really Fail: The Warning Signs Investors Look For</a></li>
+      <li><a href="#">Canadian small businesses are growing and holding on to more workers</a></li>
+      <li><a href="#">Sprout Family closes $3.55M oversubscribed seed round</a></li>
+      <li><a href="#">MaRS confirms network of 20 international partners</a></li>
+    </ul>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <article class="lead rv">
+      <a href="#"><div class="media wide" data-label="Healthcare" style="--x:70%;--y:30%"></div></a>
+      <span class="kicker">Healthcare · Founder's Guide</span>
+      <h1 class="h"><a href="#">The Health Tech Founder's Guide to Compliance and Evidence</a></h1>
+      <p class="dek">Regulators and hospital buyers want proof before they want product. Here's how Canadian health tech founders are building evidence into their roadmap from day one.</p>
+      <p class="meta">By <b>SK Uddin</b> · Oct 19, 2026 · 9 min read</p>
+    </article>
+
+    <div class="stack">
+      <article class="rv">
+        <a href="#"><div class="media" data-label="Funding" style="--r:45deg;--x:20%"></div></a>
+        <span class="kicker">Funding</span>
+        <h2 class="h"><a href="#">Can Canada's New Growth VCCI Unlock More Scale-Up Funding?</a></h2>
+        <p class="meta">By <b>Tehmina A Chaudhry</b> · Oct 19</p>
+      </article>
+      <article class="rv">
+        <span class="kicker">Business</span>
+        <h2 class="h"><a href="#">One Employee in Toronto: The Twenty-Five-Year Build of Google Canada</a></h2>
+        <p class="meta">By <b>Tehmina A Chaudhry</b> · Oct 19</p>
+      </article>
+      <article class="rv">
+        <span class="kicker">Business</span>
+        <h2 class="h"><a href="#">The Future of Venture Capital Depends on Who Controls the Capital</a></h2>
+        <p class="meta">By <b>Melissa Houston</b> · Oct 19</p>
+      </article>
+    </div>
+
+    <aside class="mostread rv" aria-labelledby="mr">
+      <h2 id="mr">Most Read</h2>
+      <ol>
+        <li><a href="#">From Public Research to Market Leadership in Canada</a></li>
+        <li><a href="#">The Rise of Canada's Post-Quantum Billion-Dollar Cybersecurity Economy</a></li>
+        <li><a href="#">Canada's Startup Leadership Crisis: Why So Few Make It Past Series B</a></li>
+        <li><a href="#">The End of the Corner-Office Mandate</a></li>
+        <li><a href="#">The Grand Finale: Exit Strategies for a Successful Startup</a></li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<!-- Awards -->
+<section class="awards" id="awards" aria-labelledby="aw-h">
+  <div class="wrap">
+    <div class="aw-top rv">
+      <div>
+        <span class="kicker">Startup Growth Business Awards 2026</span>
+        <h2 class="h" id="aw-h">Canada's premier <em>startup awards</em> program</h2>
+      </div>
+      <div>
+        <p>Recognizing the founders, innovators and ecosystem builders shaping Canada's innovation economy. This year's winners were honoured on September 21 at the third annual AGAZ Summit.</p>
+        <div class="aw-cta">
+          <a href="#" class="btn btn-red">Meet the 2026 winners <svg><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn btn-ghost">Nominate for 2027</a>
+        </div>
+      </div>
+    </div>
+    <div class="aw-grid">
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-award"/></svg></span><h3>Startup of the Year (SME)</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-spark"/></svg></span><h3>Most Impactful Startup</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-rocket"/></svg></span><h3>People's Choice: Most Innovative Startup</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h3>Ecosystem Builder</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h3>Immigrant Founder</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="aw-card rv"><span class="ico"><svg><use href="#i-heart"/></svg></span><h3>Community Impact</h3><span class="meta">Read the profile <svg><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Startups & Tech -->
+<section id="startups">
+  <div class="wrap">
+    <div class="sec-head"><h2>Startups &amp; Technology</h2><a href="#">All stories <svg><use href="#i-arrow"/></svg></a></div>
+    <div class="g4">
+      <article class="card rv"><a href="#"><div class="media" data-label="Technology" style="--x:80%;--r:60deg"></div></a><div><span class="kicker">Technology</span><h3 class="h"><a href="#">Why Canada's Biotech Companies Struggle to Scale</a></h3><p class="ex">The science is world-class. The path from lab to global company is not.</p><p class="meta">Hammad Siddiqui · Oct 19</p></div></article>
+      <article class="card rv"><a href="#"><div class="media" data-label="Startup" style="--y:80%;--r:20deg"></div></a><div><span class="kicker">Startup</span><h3 class="h"><a href="#">Accelerating the Journey from Discovery to Market</a></h3><p class="meta">Tehmina A Chaudhry · Oct 19</p></div></article>
+      <article class="card rv"><a href="#"><div class="media" data-label="Technology" style="--x:10%;--r:100deg"></div></a><div><span class="kicker">Technology</span><h3 class="h"><a href="#">Designing a Tech Stack That Can Scale With Regulation</a></h3><p class="meta">Hammad Siddiqui · Oct 19</p></div></article>
+      <article class="card rv"><a href="#"><div class="media" data-label="Policy" style="--x:60%;--y:70%;--r:160deg"></div></a><div><span class="kicker">Startup</span><h3 class="h"><a href="#">50% Tariffs: What It Means for Startups</a></h3><p class="meta">Sep 16, 2026</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- Interviews -->
+<section class="qa" id="founders">
+  <div class="wrap">
+    <div class="sec-head"><h2>Founder Interviews</h2><a href="#">All interviews <svg><use href="#i-arrow"/></svg></a></div>
+    <div class="qa-grid">
+      <a href="#" class="qa-card rv"><span class="q" aria-hidden="true">“</span><span class="kicker">Email Interview</span><h3 class="h">Smarter Stays, Stronger Margins: How KoruStay Empowers the Modern Host</h3><span class="meta">Hammad Siddiqui · Oct 19</span></a>
+      <a href="#" class="qa-card rv"><span class="q" aria-hidden="true">“</span><span class="kicker">Email Interview</span><h3 class="h">From AI Experiments to Everyday Business Leverage</h3><span class="meta">Tehmina A Chaudhry · Oct 19</span></a>
+      <a href="#" class="qa-card rv"><span class="q" aria-hidden="true">“</span><span class="kicker">Email Interview</span><h3 class="h">Canada Can't Afford to Leave AI to the Enterprises</h3><span class="meta">Tehmina A Chaudhry · Sep 16</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Capital split -->
+<section id="capital">
+  <div class="wrap split">
+    <div>
+      <div class="sec-head"><h2>Investment, Tax &amp; Capital</h2><a href="#">More <svg><use href="#i-arrow"/></svg></a></div>
+      <article class="feature-big rv">
+        <a href="#"><div class="media" data-label="Investment" style="--x:75%;--y:25%;--r:30deg"></div></a>
+        <span class="kicker">Investment</span>
+        <h3 class="h"><a href="#">Why Startups Really Fail: The Warning Signs Investors Look For</a></h3>
+        <p class="dek">Most startups don't die from one bad decision. Investors spot the slow leaks long before the founder does.</p>
+        <p class="meta" style="margin-top:12px">By <b>Nikos Iatropoulos</b> · Nov 6, 2026</p>
+      </article>
+    </div>
+    <div>
+      <div class="sec-head"><h2>Funding Desk</h2><a href="#">More <svg><use href="#i-arrow"/></svg></a></div>
+      <div class="list-rows">
+        <article class="rv"><a href="#"><div class="media" style="--r:80deg"></div></a><div><span class="kicker">Investment</span><h3 class="h"><a href="#">Québec's Fonds Impulsion and the Future of Co-Investment</a></h3><p class="meta">Oct 19</p></div></article>
+        <article class="rv"><a href="#"><div class="media" style="--r:10deg;--x:80%"></div></a><div><span class="kicker">Funding</span><h3 class="h"><a href="#">A Founder's Guide to Canadian Innovation Funding in 2026</a></h3><p class="meta">Oct 19</p></div></article>
+        <article class="rv"><a href="#"><div class="media" style="--r:140deg;--y:80%"></div></a><div><span class="kicker">Tax</span><h3 class="h"><a href="#">Unpacking SR&amp;ED Incentives for Canadian Innovators</a></h3><p class="meta">Aug 14</p></div></article>
+        <article class="rv"><a href="#"><div class="media" style="--r:50deg;--x:10%"></div></a><div><span class="kicker">Investment</span><h3 class="h"><a href="#">The $25B Canada Strong Fund Could Transform Deep Tech Investment</a></h3><p class="meta">Aug 14</p></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head"><h2>Artificial Intelligence</h2><a href="#">All AI coverage <svg><use href="#i-arrow"/></svg></a></div>
+    <div class="g3">
+      <article class="card rv"><a href="#"><div class="media" data-label="AI" style="--x:50%;--r:75deg"></div></a><span class="kicker">AI Infrastructure</span><h3 class="h"><a href="#">Building Canada's Next Competitive Layer Through AI Infrastructure</a></h3><p class="meta">Oct 19</p></article>
+      <article class="card rv"><a href="#"><div class="media" data-label="AI" style="--x:20%;--y:70%;--r:120deg"></div></a><span class="kicker">Enterprise AI</span><h3 class="h"><a href="#">Navigating the Enterprise AI Reality Check: On the Road to ROI</a></h3><p class="meta">Oct 19</p></article>
+      <article class="card rv"><a href="#"><div class="media" data-label="Policy" style="--x:85%;--r:15deg"></div></a><span class="kicker">Policy</span><h3 class="h"><a href="#">Ontario Just Made AI Disclosure Mandatory in Hiring. Here's What Startups Need to Do.</a></h3><p class="meta">Jul 4</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- Share your story -->
+<section class="story-cta">
+  <div class="wrap">
+    <div class="story-box rv">
+      <div>
+        <span class="kicker" style="color:#fff;opacity:.85">Contribute</span>
+        <h2 class="h" style="margin-top:12px">Share your journey. Inspire the next generation of founders.</h2>
+        <p>We spotlight entrepreneurs, founders and business leaders who are building, scaling and creating impact across Canada.</p>
+      </div>
+      <div class="actions">
+        <a href="#" class="btn btn-white">Share your story <svg><use href="#i-arrow"/></svg></a>
+        <span class="small">Email interviews · Feature profiles · Guest columns</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest + Newsletter -->
+<section id="latest">
+  <div class="wrap latest-grid">
+    <div>
+      <div class="sec-head"><h2>Latest News</h2><a href="#">News archive <svg><use href="#i-arrow"/></svg></a></div>
+      <div class="news-list">
+        <article class="rv"><time datetime="2026-10-23">Oct 23</time><div><h3 class="h"><a href="#">Canadian small businesses are growing and holding on to more workers, Wagepoint data shows</a></h3><p>Average team size rose 44% since 2019 as Gen Z's share of the workforce more than doubled.</p></div></article>
+        <article class="rv"><time datetime="2026-10-23">Oct 23</time><div><h3 class="h"><a href="#">Meridian launches Season 3 of the Small Business Big Impact Podcast</a></h3></div></article>
+        <article class="rv"><time datetime="2026-10-16">Oct 16</time><div><h3 class="h"><a href="#">Sprout Family closes $3.55M oversubscribed seed round to build Canada's family-building benefits infrastructure</a></h3></div></article>
+        <article class="rv"><time datetime="2026-09-17">Sep 17</time><div><h3 class="h"><a href="#">MaRS confirms network of 20 international partners, building Canada's global innovation gateway</a></h3></div></article>
+        <article class="rv"><time datetime="2026-06-17">Jun 17</time><div><h3 class="h"><a href="#">Saskatoon entrepreneur saves local crops with first-of-its-kind portable disease detection device</a></h3></div></article>
+      </div>
+    </div>
+    <aside class="newsletter" id="newsletter" aria-labelledby="nl-h">
+      <span class="kicker">The Weekly Brief</span>
+      <h2 class="h" id="nl-h">Canada's startup scene, in your inbox every Tuesday.</h2>
+      <p>Funding rounds, founder interviews and policy shifts that matter, in a five-minute read.</p>
+      <form id="nl" novalidate>
+        <div class="field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.ca" required aria-describedby="nl-msg">
+        </div>
+        <button class="btn btn-red" type="submit">Subscribe free</button>
+        <p class="form-msg" id="nl-msg" role="status" aria-live="polite"></p>
+      </form>
+      <p class="fine">No spam. Unsubscribe in one click.</p>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="#" class="logo" aria-label="Startup Growth home">Startup&nbsp;Gr<span class="o" aria-hidden="true"><svg><use href="#i-star"/></svg></span>wth</a>
+        <p>A digital-first publication for founders, innovators and growth-driven leaders, built on the foundation of CanadianSME Small Business Magazine.</p>
+        <div style="display:flex;gap:4px;margin-left:-12px">
+          <a class="icon-btn" href="#" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+          <a class="icon-btn" href="#" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+          <a class="icon-btn" href="#" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
+        </div>
+      </div>
+      <div><h3>Sections</h3><ul><li><a href="#">Startups</a></li><li><a href="#">Scaleups</a></li><li><a href="#">Business Growth</a></li><li><a href="#">Founders</a></li><li><a href="#">Innovation</a></li></ul></div>
+      <div><h3>Programs</h3><ul><li><a href="#">Business Awards</a></li><li><a href="#">Podcast</a></li><li><a href="#">Share Your Story</a></li><li><a href="#">Digital Issues</a></li></ul></div>
+      <div><h3>Company</h3><ul><li><a href="#">About Us</a></li><li><a href="#">Advertise</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© 2026 Startup Growth Magazine. All rights reserved.</span><span>Made in Canada</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Mobile menu
+  var b=document.getElementById('menuBtn'),m=document.getElementById('mobileMenu');
+  function setMenu(open){m.dataset.open=open;b.setAttribute('aria-expanded',open);b.setAttribute('aria-label',open?'Close menu':'Open menu');b.querySelector('use').setAttribute('href',open?'#i-x':'#i-menu');}
+  b.addEventListener('click',function(){setMenu(m.dataset.open!=='true')});
+  m.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.dataset.open==='true'){setMenu(false);b.focus()}});
+
+  // Theme toggle
+  var t=document.getElementById('theme'),root=document.documentElement;
+  try{var s=localStorage.getItem('sg-theme');if(s)root.dataset.theme=s}catch(e){}
+  t.addEventListener('click',function(){
+    var dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+    root.dataset.theme=dark?'light':'dark';
+    try{localStorage.setItem('sg-theme',root.dataset.theme)}catch(e){}
+  });
+
+  // Newsletter (demo)
+  var f=document.getElementById('nl'),i=document.getElementById('email'),msg=document.getElementById('nl-msg');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    if(!i.value||!i.checkValidity()){msg.textContent='Please enter a valid email address.';i.setAttribute('aria-invalid','true');i.focus();return}
+    i.removeAttribute('aria-invalid');msg.textContent='Thanks! Check your inbox to confirm.';f.reset();
+  });
+
+  // Subtle reveal
+  var els=document.querySelectorAll('.rv');
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
